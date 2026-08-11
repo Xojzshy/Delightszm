@@ -23,6 +23,7 @@ import { initAuth } from './lib/firebase';
 import { User } from 'firebase/auth';
 import { GoogleSignInBtn } from './components/GoogleSignInBtn';
 import { WorkspaceFeatures } from './components/WorkspaceFeatures';
+import { motion, AnimatePresence } from 'motion/react';
 
 // Import our generated high-quality assets
 // @ts-ignore
@@ -42,7 +43,7 @@ import kitkatCrunchCup from './assets/images/kitkat_crunch_cup_1786468198839.jpg
 // @ts-ignore
 import classicStrawberryShake from './assets/images/classic_strawberry_shake_1786468212039.jpg';
 // @ts-ignore
-import perfectSundaySundae from './assets/images/perfect_sunday_sundae_1786468231799.jpg';
+import perfectSundaySundae from './assets/images/perfect_sunday_sundae_final_1.jpg';
 // @ts-ignore
 import kitkatMilkshake from './assets/images/kitkat_milkshake_1786468245827.jpg';
 // @ts-ignore
@@ -66,17 +67,17 @@ import vanillaScoop from './assets/images/vanilla_scoop_1786467896372.jpg';
 // @ts-ignore
 import chocolateScoop from './assets/images/chocolate_scoop_1786467910414.jpg';
 // @ts-ignore
-import passionFruitCooler from './assets/images/passion_fruit_cooler_1786467924439.jpg';
+import passionFruitCooler from './assets/images/passion_fruit_cooler_final_1.jpg';
 // @ts-ignore
-import sunriseMocktail from './assets/images/sunrise_mocktail_1786467938500.jpg';
+import sunriseMocktail from './assets/images/delights_surprise_mocktail_final_1.jpg';
 // @ts-ignore
 import gourmetDonut from './assets/images/gourmet_donut_1786467952791.jpg';
 // @ts-ignore
 import richCappuccino from './assets/images/rich_cappuccino_1786467967721.jpg';
 // @ts-ignore
-import sharingMemories from './assets/images/sharing_memories_1786467992823.jpg';
+import sharingMemories from './assets/images/sharing_sweet_memories_final_1.jpg';
 // @ts-ignore
-import storeVibes from './assets/images/store_vibes_1786468022004.jpg';
+import storeVibes from './assets/images/arcades_stores_vibes_final_1.jpg';
 
 // Menu items data
 const MENU_CATEGORIES = ['all', 'milkshakes', 'ice cream', 'drinks & treats', 'customizer'];
@@ -968,10 +969,32 @@ export default function App() {
               </div>
             </div>
           ) : filteredMenuItems.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <AnimatePresence mode="wait">
+            <motion.div 
+              key={selectedCategory + searchQuery}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.1 }
+                }
+              }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+            >
               {filteredMenuItems.map(item => (
-                <div 
+                <motion.div 
                   key={item.id}
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { 
+                      opacity: 1, 
+                      y: 0,
+                      transition: { type: "spring", stiffness: 300, damping: 24 }
+                    }
+                  }}
                   className="bg-vanilla rounded-3xl border border-cream overflow-hidden hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group"
                   id={`product-card-${item.id}`}
                 >
@@ -1021,9 +1044,10 @@ export default function App() {
                     </button>
                   </div>
 
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
+            </AnimatePresence>
           ) : (
             <div className="text-center py-16 bg-cream/10 rounded-3xl border border-dashed border-cream">
               <p className="text-chocolate/50 font-medium">No sweet treats found matching your search.</p>
@@ -1134,111 +1158,6 @@ export default function App() {
                     allowFullScreen
                   />
                 </div>
-              </div>
-
-              <div className="pt-4">
-                <a 
-                  href="https://www.tiktok.com/@delightszm" 
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 bg-white text-chocolate hover:bg-strawberry hover:text-white font-extrabold py-3.5 px-8 rounded-full text-sm shadow-md transition-all duration-300 cursor-pointer"
-                >
-                  Follow Us @delightszm
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
-
-            {/* Right mock smartphone showcasing TikTok vibes */}
-            <div className="lg:col-span-7 flex justify-center">
-              <div className="relative w-full max-w-[420px] bg-chocolate border border-cream/10 p-4 rounded-[40px] shadow-2xl">
-                
-                {/* Simulated Smartphone Screen */}
-                <div className="bg-black aspect-[9/16] rounded-[32px] overflow-hidden relative border border-white/10 group">
-                  
-                  {/* Smartphone camera punch-hole */}
-                  <div className="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-4 bg-black rounded-full z-30 flex items-center justify-center">
-                    <div className="w-2.5 h-2.5 rounded-full bg-white/15" />
-                  </div>
-
-                  {/* Main video background */}
-                  <video 
-                    autoPlay 
-                    loop 
-                    muted 
-                    playsInline 
-                    className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500"
-                  >
-                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
-                  </video>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-black/30" />
-
-                  {/* TikTok Overlays */}
-                  <div className="absolute top-10 left-0 w-full px-6 flex justify-between items-center z-20">
-                    <div className="flex items-center gap-2 text-white font-bold text-xs">
-                      <span className="text-strawberry">●</span> LIVE
-                    </div>
-                    <div className="flex gap-4 text-white text-xs opacity-80 font-bold">
-                      <span className="border-b border-white pb-1">Following</span>
-                      <span>For You</span>
-                    </div>
-                  </div>
-
-                  {/* Play Button Mock */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 hover:scale-110 active:scale-90 transition-all cursor-pointer">
-                      <div className="w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-12 border-l-white ml-1" />
-                    </div>
-                  </div>
-
-                  {/* Bottom Video metadata */}
-                  <div className="absolute bottom-6 left-6 right-16 text-white text-left space-y-2 z-20">
-                    <h5 className="font-bold text-sm">@delightszm</h5>
-                    <p className="text-xs text-white/80 font-light">
-                      Creamy chocolate goodness dripping to perfection. Who are you sharing this Waffle with? 🤤🍓🥛 #lusaka #delights #desserts #zambia #waffles
-                    </p>
-                    <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full py-1 px-3 w-fit text-[10px] font-bold">
-                      <Sparkles className="w-3.5 h-3.5 text-caramel animate-pulse" />
-                      <span>Original Sound - Delights</span>
-                    </div>
-                  </div>
-
-                  {/* Right hand interaction buttons */}
-                  <div className="absolute bottom-6 right-3 flex flex-col gap-4 items-center z-20 text-white">
-                    
-                    {/* Profile */}
-                    <div className="w-10 h-10 rounded-full border border-white bg-strawberry flex items-center justify-center font-bold text-xs shadow-md">
-                      D
-                    </div>
-                    
-                    {/* Heart */}
-                    <div className="flex flex-col items-center gap-0.5">
-                      <button className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white hover:text-strawberry hover:bg-black/60 transition-colors">
-                        <Heart className="w-5 h-5 fill-current" />
-                      </button>
-                      <span className="text-[10px] font-bold">14.2K</span>
-                    </div>
-
-                    {/* Coffee */}
-                    <div className="flex flex-col items-center gap-0.5">
-                      <button className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white hover:text-caramel hover:bg-black/60 transition-colors">
-                        <Coffee className="w-5 h-5" />
-                      </button>
-                      <span className="text-[10px] font-bold">1.8K</span>
-                    </div>
-                    
-                    {/* Share */}
-                    <div className="flex flex-col items-center gap-0.5">
-                      <button className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center text-white hover:text-cream hover:bg-black/60 transition-colors">
-                        <Sparkles className="w-5 h-5" />
-                      </button>
-                      <span className="text-[10px] font-bold">4.2K</span>
-                    </div>
-
-                  </div>
-
-                </div>
-
               </div>
             </div>
 
