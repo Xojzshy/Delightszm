@@ -22,32 +22,31 @@ import {
 import { initAuth } from './lib/firebase';
 import { User } from 'firebase/auth';
 import { GoogleSignInBtn } from './components/GoogleSignInBtn';
-import { WorkspaceFeatures } from './components/WorkspaceFeatures';
 import { motion, AnimatePresence } from 'motion/react';
 
 // Import our generated high-quality assets
 // @ts-ignore
-import heroImage from './assets/images/delights_hero_banner_1786468110946.jpg';
+import heroImage from './assets/images/hero_image_new_1786526537490.jpg';
 // @ts-ignore
-import chocolateShake from './assets/images/chocolate_shake_1786468123732.jpg';
+import chocolateShake from './assets/images/chocolate_shake_new_1786526550805.jpg';
 // @ts-ignore
-import strawberryWaffles from './assets/images/strawberry_waffles_1786468137658.jpg';
+import strawberryWaffles from './assets/images/strawberry_waffles_new_1786526621732.jpg';
 // @ts-ignore
-import caramelIcedCoffee from './assets/images/caramel_iced_coffee_1786468150239.jpg';
+import caramelIcedCoffee from './assets/images/caramel_iced_coffee_new_1786526586014.jpg';
 // @ts-ignore
-import caramelSwirlDessert from './assets/images/caramel_swirl_dessert_1786468164214.jpg';
+import caramelSwirlDessert from './assets/images/caramel_swirl_dessert_new_1786526609879.jpg';
 // @ts-ignore
-import snickersShake from './assets/images/snickers_shake_1786468183098.jpg';
+import snickersShake from './assets/images/snickers_shake_new_1786526574486.jpg';
 // @ts-ignore
-import kitkatCrunchCup from './assets/images/kitkat_crunch_cup_1786468198839.jpg';
+import kitkatCrunchCup from './assets/images/kitkat_crunch_cup_new_1786526596847.jpg';
 // @ts-ignore
-import classicStrawberryShake from './assets/images/classic_strawberry_shake_1786468212039.jpg';
+import classicStrawberryShake from './assets/images/classic_strawberry_shake_new_1786526561684.jpg';
 // @ts-ignore
-import perfectSundaySundae from './assets/images/perfect_sunday_sundae_final_1.jpg';
+import perfectSundaySundae from './assets/images/perfect_sunday_sundae_1786525928387.jpg';
 // @ts-ignore
-import kitkatMilkshake from './assets/images/kitkat_milkshake_1786468245827.jpg';
+import kitkatMilkshake from './assets/images/kitkat_milkshake_new_1786526680974.jpg';
 // @ts-ignore
-import layeredIcedMocha from './assets/images/layered_iced_mocha_1786468268378.jpg';
+import layeredIcedMocha from './assets/images/layered_iced_mocha_new_1786526642141.jpg';
 // @ts-ignore
 import gourmetShakeCreation from './assets/images/gourmet_shake_creation_1786469738673.jpg';
 // @ts-ignore
@@ -57,27 +56,27 @@ import instagramCoffeeMoments from './assets/images/instagram_coffee_moments_178
 
 // New imported images
 // @ts-ignore
-import oreoMilkshake from './assets/images/oreo_milkshake_1786467850836.jpg';
+import oreoMilkshake from './assets/images/oreo_milkshake_1786524407597.jpg';
 // @ts-ignore
-import dairyMilkShake from './assets/images/dairy_milk_shake_1786467868241.jpg';
+import dairyMilkShake from './assets/images/dairy_milk_shake_1786524380553.jpg';
 // @ts-ignore
-import dairyMilkIceCream from './assets/images/dairy_milk_ice_cream_1786467881682.jpg';
+import dairyMilkIceCream from './assets/images/dairy_milk_ice_cream_1786524368242.jpg';
 // @ts-ignore
-import vanillaScoop from './assets/images/vanilla_scoop_1786467896372.jpg';
+import vanillaScoop from './assets/images/vanilla_scoop_1786524432679.jpg';
 // @ts-ignore
-import chocolateScoop from './assets/images/chocolate_scoop_1786467910414.jpg';
+import chocolateScoop from './assets/images/chocolate_scoop_1786524356037.jpg';
 // @ts-ignore
-import passionFruitCooler from './assets/images/passion_fruit_cooler_final_1.jpg';
+import passionFruitCooler from './assets/images/passion_fruit_cooler_1786525760738.jpg';
 // @ts-ignore
-import sunriseMocktail from './assets/images/delights_surprise_mocktail_final_1.jpg';
+import sunriseMocktail from './assets/images/sunrise_mocktail_1786525809785.jpg';
 // @ts-ignore
-import gourmetDonut from './assets/images/gourmet_donut_1786467952791.jpg';
+import gourmetDonut from './assets/images/gourmet_donut_1786524396115.jpg';
 // @ts-ignore
-import richCappuccino from './assets/images/rich_cappuccino_1786467967721.jpg';
+import richCappuccino from './assets/images/rich_cappuccino_1786524420352.jpg';
 // @ts-ignore
-import sharingMemories from './assets/images/sharing_sweet_memories_final_1.jpg';
+import sharingMemories from './assets/images/sharing_sweet_memories_1786525991128.jpg';
 // @ts-ignore
-import storeVibes from './assets/images/arcades_stores_vibes_final_1.jpg';
+import storeVibes from './assets/images/arcades_stores_vibes_1786526024828.jpg';
 
 // Menu items data
 const MENU_CATEGORIES = ['all', 'milkshakes', 'ice cream', 'drinks & treats', 'customizer'];
@@ -353,17 +352,14 @@ export default function App() {
 
   // Auth state
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     const unsubscribe = initAuth(
-      (currentUser, currentToken) => {
+      (currentUser) => {
         setUser(currentUser);
-        setToken(currentToken);
       },
       () => {
         setUser(null);
-        setToken(null);
       }
     );
     return () => unsubscribe();
@@ -459,7 +455,7 @@ export default function App() {
           {/* Action Button & Menu Icon */}
           <div className="flex items-center gap-4">
             <div className="hidden lg:block">
-              <GoogleSignInBtn user={user} setUser={setUser} setToken={setToken} />
+              <GoogleSignInBtn user={user} setUser={setUser} />
             </div>
 
             <button 
@@ -1505,7 +1501,75 @@ export default function App() {
 
             {/* Right form submission with success feedback */}
             <div className="lg:col-span-7 bg-vanilla p-8 md:p-10 rounded-[32px] border border-cream shadow-lg text-left">
-              <WorkspaceFeatures user={user} token={token} setUser={setUser} setToken={setToken} />
+              {contactSubmitted ? (
+                <div className="h-full flex flex-col items-center justify-center space-y-4 text-center py-12 animate-fade-in">
+                  <div className="w-16 h-16 rounded-full bg-cream flex items-center justify-center text-strawberry">
+                    <CheckCircle className="w-8 h-8" />
+                  </div>
+                  <h4 className="text-2xl font-black font-display text-chocolate">Thank You, {contactName}!</h4>
+                  <p className="text-sm text-chocolate/70 max-w-sm mx-auto">
+                    We have received your sweet message. Our team will get back to you shortly.
+                  </p>
+                  <button 
+                    onClick={() => {
+                      setContactSubmitted(false);
+                      setContactName('');
+                      setContactEmail('');
+                      setContactMessage('');
+                    }}
+                    className="mt-4 bg-cream/50 hover:bg-cream text-chocolate font-bold text-xs py-2 px-6 rounded-full transition-colors cursor-pointer"
+                  >
+                    Send Another Message
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleContactSubmit} className="space-y-6">
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-chocolate/80">Your Name *</label>
+                        <input 
+                          type="text" 
+                          required
+                          value={contactName}
+                          onChange={(e) => setContactName(e.target.value)}
+                          className="w-full bg-cream/30 border border-cream rounded-xl py-3 px-4 text-sm focus:border-caramel/50 focus:bg-white outline-none transition-all"
+                          placeholder="e.g. Chileshe"
+                        />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-chocolate/80">Your Email *</label>
+                        <input 
+                          type="email" 
+                          required
+                          value={contactEmail}
+                          onChange={(e) => setContactEmail(e.target.value)}
+                          className="w-full bg-cream/30 border border-cream rounded-xl py-3 px-4 text-sm focus:border-caramel/50 focus:bg-white outline-none transition-all"
+                          placeholder="e.g. name@example.com"
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-chocolate/80">Your Message *</label>
+                      <textarea 
+                        required
+                        value={contactMessage}
+                        onChange={(e) => setContactMessage(e.target.value)}
+                        rows={4}
+                        className="w-full bg-cream/30 border border-cream rounded-xl py-3 px-4 text-sm focus:border-caramel/50 focus:bg-white outline-none transition-all resize-none"
+                        placeholder="What would you like to tell us?"
+                      />
+                    </div>
+                  </div>
+                  <button 
+                    type="submit"
+                    className="flex items-center justify-center gap-2 w-full bg-chocolate hover:bg-chocolate/90 text-cream font-bold py-4 rounded-xl text-sm shadow-md transition-all cursor-pointer"
+                  >
+                    <Send className="w-4 h-4" />
+                    Send Message
+                  </button>
+                </form>
+              )}
             </div>
 
           </div>

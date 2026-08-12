@@ -5,10 +5,9 @@ import { User } from 'firebase/auth';
 interface Props {
   user: User | null;
   setUser: (user: User | null) => void;
-  setToken: (token: string | null) => void;
 }
 
-export function GoogleSignInBtn({ user, setUser, setToken }: Props) {
+export function GoogleSignInBtn({ user, setUser }: Props) {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const handleLogin = async () => {
@@ -16,7 +15,6 @@ export function GoogleSignInBtn({ user, setUser, setToken }: Props) {
     try {
       const result = await googleSignIn();
       if (result) {
-        setToken(result.accessToken);
         setUser(result.user);
       }
     } catch (err) {
@@ -30,7 +28,6 @@ export function GoogleSignInBtn({ user, setUser, setToken }: Props) {
     try {
       await logout();
       setUser(null);
-      setToken(null);
     } catch (err) {
       console.error('Logout failed:', err);
     }
@@ -74,7 +71,7 @@ export function GoogleSignInBtn({ user, setUser, setToken }: Props) {
           </svg>
         </div>
         <span className="gsi-material-button-contents px-4 text-sm font-semibold text-gray-700">
-          {isLoggingIn ? 'Connecting...' : 'Connect Workspace'}
+          {isLoggingIn ? 'Connecting...' : 'Sign in with Google'}
         </span>
       </div>
     </button>
