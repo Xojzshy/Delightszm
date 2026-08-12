@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { TikTokEmbed } from './components/TikTokEmbed';
+import { InstagramEmbed } from './components/InstagramEmbed';
 import { 
   Sparkles, 
   MapPin, 
@@ -520,7 +522,7 @@ export default function App() {
 
         {/* Content */}
         <div className="max-w-7xl mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-8 space-y-8 text-cream">
+          <div className="lg:col-span-12 space-y-8 text-cream">
             
             {/* Tag / Badge */}
             <div className="inline-flex items-center gap-2 bg-strawberry/20 backdrop-blur-md border border-strawberry/30 px-4 py-1.5 rounded-full text-xs md:text-sm font-bold tracking-wide uppercase text-strawberry-100">
@@ -1086,17 +1088,17 @@ export default function App() {
 
         <div className="max-w-7xl mx-auto relative z-10">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 xl:gap-12 items-center">
             
             {/* Left pitch text */}
-            <div className="lg:col-span-5 space-y-6">
+            <div className="xl:col-span-4 space-y-6">
               <div className="inline-flex items-center gap-2 bg-strawberry/20 border border-strawberry/30 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-strawberry">
                 <span className="w-2 h-2 rounded-full bg-strawberry animate-ping" />
                 <span>Viral Sensation</span>
               </div>
               
               <h3 className="text-3xl md:text-5xl font-black tracking-tight leading-tight font-display text-white">
-                Lusaka's Favourite Dessert Hub on TikTok
+                Lusaka's Favourite Dessert Hub
               </h3>
               
               <p className="text-cream/80 text-sm md:text-base leading-relaxed">
@@ -1107,7 +1109,7 @@ export default function App() {
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center font-bold text-white">20K</div>
                   <div>
-                    <h5 className="font-bold text-white text-sm">Growing TikTok Audience</h5>
+                    <h5 className="font-bold text-white text-sm">Growing Audience</h5>
                     <p className="text-xs text-cream/60">Connecting sweet tooths from across Lusaka</p>
                   </div>
                 </div>
@@ -1121,40 +1123,27 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="pt-4">
+              <div className="pt-4 flex flex-col sm:flex-row gap-4">
                 <a 
                   href="https://www.tiktok.com/@delightszm" 
                   target="_blank" 
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 bg-white text-chocolate hover:bg-strawberry hover:text-white font-extrabold py-3.5 px-8 rounded-full text-sm shadow-md transition-all duration-300 cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 bg-white text-chocolate hover:bg-strawberry hover:text-white font-extrabold py-3.5 px-6 rounded-full text-sm shadow-md transition-all duration-300 cursor-pointer"
                 >
-                  Follow Us @delightszm
+                  Follow @delightszm
                   <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
             </div>
 
-            {/* Right mock smartphone showcasing TikTok vibes */}
-            <div className="lg:col-span-7 flex justify-center">
-              <div className="relative w-full max-w-[420px] bg-chocolate border border-cream/10 p-4 rounded-[40px] shadow-2xl">
-                
-                {/* Simulated Smartphone Screen */}
-                <div className="bg-black aspect-[9/16] rounded-[32px] overflow-hidden relative border border-white/10 group">
-                  
-                  {/* Smartphone camera punch-hole */}
-                  <div className="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-4 bg-black rounded-full z-30 flex items-center justify-center">
-                    <div className="w-2.5 h-2.5 rounded-full bg-white/15" />
-                  </div>
-
-                  {/* TikTok Embedded Video */}
-                  <iframe 
-                    src="https://www.tiktok.com/embed/v2/7567429144506567947" 
-                    className="w-full h-full border-0 absolute inset-0 z-10" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen
-                  />
-                </div>
-              </div>
+            {/* Middle TikTok Embed */}
+            <div className="xl:col-span-4 flex justify-center">
+              <TikTokEmbed />
+            </div>
+            
+            {/* Right Instagram Embed */}
+            <div className="xl:col-span-4 flex justify-center">
+              <InstagramEmbed />
             </div>
 
           </div>
@@ -1385,7 +1374,7 @@ export default function App() {
                   <div className="space-y-1">
                     <h5 className="font-extrabold text-chocolate font-display text-base">Arcades Mall Corridor Map</h5>
                     <p className="text-xs text-chocolate/60 max-w-sm mx-auto">
-                      Interactive Google Map directions placeholder. Delights is located near the main courtyard dining pavilion.
+                      Delights is located near the main courtyard dining pavilion at Arcades Shopping Mall. Tap below for directions.
                     </p>
                   </div>
 
